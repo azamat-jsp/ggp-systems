@@ -1,0 +1,33 @@
+@extends('layouts.admin')
+
+@section('content')
+    <div class="card-body">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <br />
+        @endif
+        <form method="post" action="{{ route('companies.update', $company) }}">
+            <div class="form-group">
+                @csrf
+                @method('PATCH')
+                <label for="name">name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $company->name }}"/>
+            </div>
+            <div class="form-group">
+                <label for="address">address :</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ $company->address }}"/>
+            </div>
+            <div class="form-group">
+                <label for="city">city :</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{ $company->city }}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Update company</button>
+        </form>
+    </div>
+@endsection
